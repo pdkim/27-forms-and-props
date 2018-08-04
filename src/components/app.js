@@ -4,8 +4,6 @@ import PokemonList from './pokemon/list.js';
 import PokemonDetail from './pokemon/detail.js';
 import { fetchData } from '../lib/utils.js';
 
-//import '../style/app.scss;
-
 const pokemonAPI = 'https://www.pokeapi.co/api/v2/pokemon';
 
 class App extends React.Component {
