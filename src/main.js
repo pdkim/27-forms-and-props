@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
-// import App from './components/app.js';
 import App2 from './components/app2.js';
 
 class Main extends React.Component {
@@ -9,7 +8,6 @@ class Main extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {/* <App/> */}
         <App2 />
       </React.Fragment>
     );

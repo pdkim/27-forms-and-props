@@ -10,7 +10,7 @@ export default class SearchResultList extends React.Component {
 
   renderList() {
     return this.props.listInfo.map((articles, i) => {
-      return <li key={i}><a href={articles.data.url}>{articles.data.title}</a><p>{articles.data.ups}</p></li>
+      return <li key={i}><a href={articles.data.url}>{articles.data.title}</a><p>Up Votes: {articles.data.ups}</p></li>
     })
   }
 

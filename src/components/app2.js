@@ -1,8 +1,12 @@
 import React from 'react';
 
+import '../style/app.scss';
+
 import SearchForm from './reddit/SearchForm';
 import SearchResultList from './reddit/SearchResultList';
 import { fetchData } from '../lib/utils';
+
+
 
 const redditAPI = 'https://www.reddit.com/r';
 
@@ -11,9 +15,8 @@ class App2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      redditData: {},
       redditList: [],
-      loading: false,
+      error: false,
     };
 
     this.getRedditInfo = this.getRedditInfo.bind(this);
@@ -27,6 +30,10 @@ class App2 extends React.Component {
       })
       .then((json) => {
         this.setState({redditList: json.data.children})
+      })
+      .catch(() => {
+        console.log('error!')
+        this.setState({error: true})
       })
   }
 

@@ -18,34 +18,30 @@ export default class SearchForm extends React.Component {
   handleSearch(e) {
     let search = e.target.value;
     this.setState({ search });
-    // console.log(this.state.search);
   }
 
   handleLimit(e) {
     let limit = e.target.value;
     this.setState({ limit })
-    // console.log(this.state.limit);
   }
 
   handleSubmit(e) {
     e.preventDefault();
     this.props.searchMethod(this.state);
-    // this.props.searchMethod(this.state.limit);
-
   }
 
   render() {
     return (
-      <div className="redditSearch">
+      <div className={this.props.error}>
         <h3>Enter a keyword and limit number</h3>
         <form onSubmit={this.handleSubmit}>
           Search Keyword
           <br/>
-          <input onChange={this.handleSearch} placeholder="Enter text" />
+          <input onChange={this.handleSearch} id="keyword" type="text" placeholder="Enter text" />
           <br/>
           Search Limit (1-100)
           <br/>
-          <input onChange={this.handleLimit} placeholder="Enter number" />
+          <input onChange={this.handleLimit} id="entries" type="number" min="1" max="100" placeholder="Enter number" />
 
         <br/>
         <button type="submit">submit</button>
