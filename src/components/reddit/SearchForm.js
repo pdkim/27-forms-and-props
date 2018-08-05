@@ -12,16 +12,26 @@ export default class SearchForm extends React.Component {
     }
     this.handleSearch = this.handleSearch.bind(this);
     this.handleLimit = this.handleLimit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSearch(e) {
     let search = e.target.value;
     this.setState({ search });
+    // console.log(this.state.search);
   }
 
   handleLimit(e) {
     let limit = e.target.value;
     this.setState({ limit })
+    // console.log(this.state.limit);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.searchMethod(this.state);
+    // this.props.searchMethod(this.state.limit);
+
   }
 
   render() {
@@ -36,9 +46,11 @@ export default class SearchForm extends React.Component {
           Search Limit (1-100)
           <br/>
           <input onChange={this.handleLimit} placeholder="Enter number" />
+
+        <br/>
+        <button type="submit">submit</button>
         </form>
       </div>
-      //
     )
   }
 }

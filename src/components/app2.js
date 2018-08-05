@@ -16,61 +16,25 @@ class App2 extends React.Component {
       loading: false,
     };
 
-    this.redditDetails = this.redditDetails.bind(this);
-    this.redditSearch = this.redditSearch.bind(this);
+    this.getRedditInfo = this.getRedditInfo.bind(this);
   }
 
-  componentDidUpdate() {
-    console.log('STATE', this.state);
-  }
-
-  componentDidMount() {
-    this.loadRedditList()
-      .then(data => 
-        this.setState(Object.assign(...this.state, data))
-      );
-  }
-
-  loadRedditList() {
-    return this.load(redditAPI)
-      .then(data => {
-        let redditList = data.results;
-        return { redditList };
-      });
-  }
-
-  redditDetails(e) {
-    let url = e.target.value;
-    let loading = true;
-    return this.load(url)
-      .then(data =>
-        this.setState(Object.assign(...this.state, {data}))
-      );
-  }
-
-  redditSearch(search) {
-    let limit = this.state.limit;
-    let url = `${redditAPI}/${search}?limit=${limit}`;
-    return this.load(url)
-      .then(data => 
-        this.setState(Object.assign(...this.state, {data}))
-      );
-  }
-
-  load(url) {
-    this.setState(Object.assign(...this.state, {loading: true}));
-    return fetchData(url)
-      .then(data => {
-        this.setState(Object.assign(...this.state, {loading:false}));
-        return data;
+  getRedditInfo(obj) {
+    let url = `${redditAPI}/${obj.search}.json?limit=${obj.limit}`;
+    fetch(url)
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+        this.setState({redditList: json.data.children})
       })
   }
 
   render() {
     return (
       <main>
-        <SearchForm />
-        <SearchResultList />
+        <SearchForm searchMethod = {this.getRedditInfo}/>
+        <SearchResultList listInfo = {this.state.redditList} />
       </main>
     )
   }

@@ -4,18 +4,22 @@ export default class SearchResultList extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.renderList = this.renderList.bind(this);
   }
 
+  renderList() {
+    return this.props.listInfo.map((articles, i) => {
+      return <li key={i}><a href={articles.data.url}>{articles.data.title}</a><p>{articles.data.ups}</p></li>
+    })
+  }
 
   render() {
     return (
       <div className="ResultsList">
         <h3>Reddit Search Results</h3>
         <ul>
-          <li>test line</li>
-          {/* {this.props.data.children.map((articles, i) =>
-          <li key={i}><a href={articles.data.url}>{articles.data.title}</a></li>
-          )} */}
+          {this.renderList()}
         </ul>
       </div>
     )
